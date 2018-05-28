@@ -68,18 +68,17 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       },
+      // copy manifest file to output path
       {
         from: path.resolve(__dirname, '../src/manifest.json'),
         to: config.build.assetsRoot
       },
+      // copy logo file to output path
       {
         from: path.resolve(__dirname, '../src/assets/logo.png'),
         to: config.build.assetsRoot
       }
     ]),
-    new WorkBoxPlugin.InjectManifest({
-      swSrc: path.resolve(__dirname, '../src/service-worker.js')
-    }),
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css'),
@@ -88,6 +87,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
       // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
       allChunks: true,
+    }),
+    // inject sw file from swSrc to output path
+    new WorkBoxPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, '../src/service-worker.js')
     }),
     // 通过插件生成sw生成
     new SwRegisterWebpackPlugin({

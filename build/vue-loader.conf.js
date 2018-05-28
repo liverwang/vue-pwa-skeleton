@@ -9,7 +9,7 @@ const sourceMapEnabled = isProduction
 module.exports = {
   loaders: utils.cssLoaders({
     sourceMap: sourceMapEnabled,
-    extract: true
+    extract: true // 因为使用Skeleton，需要分离样式文件，这里直接选择true
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
