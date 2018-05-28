@@ -15,6 +15,7 @@ const WorkBoxPlugin = require('workbox-webpack-plugin')
 const SwRegisterWebpackPlugin = require('sw-register-webpack-plugin')
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -32,6 +33,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
