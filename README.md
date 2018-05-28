@@ -1,6 +1,6 @@
 # vue-cli-demo with PWA and Skeleton
 
-> 基于Vue-cli建立的示例Demo，在Demo基础上集成了PWA和Skeleton
+> 基于[Vue-cli](https://github.com/vuejs/vue-cli)建立的示例Demo，在Demo基础上集成了PWA和Skeleton
 
 > PWA基于[workbox-webpack-plugin](https://developers.google.cn/web/tools/workbox/)实现
 
