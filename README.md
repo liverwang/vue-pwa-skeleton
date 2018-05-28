@@ -1,10 +1,8 @@
 # vue-cli-demo with PWA and Skeleton
 
-> 基于[Vue-cli](https://github.com/vuejs/vue-cli)建立的示例Demo，在Demo基础上集成了PWA和Skeleton
-
-> PWA基于[workbox-webpack-plugin](https://developers.google.cn/web/tools/workbox/)实现
-
-> Skeleton基于[vue-skeleton-webpack-plugin](https://github.com/lavas-project/vue-skeleton-webpack-plugin)实现
+> 基于[Vue-cli](https://github.com/vuejs/vue-cli)建立的示例Demo，在Demo基础上集成了PWA和Skeleton\<br>
+> PWA基于[workbox-webpack-plugin](https://developers.google.cn/web/tools/workbox/)实现\<br>
+> Skeleton基于[vue-skeleton-webpack-plugin](https://github.com/lavas-project/vue-skeleton-webpack-plugin)实现\<br>
 
 ## 启动步骤
 
@@ -19,8 +17,8 @@ npm run dev
 npm run build
 ```
 
-## 注意事项-workbox
-``` bash
+## workbox
+``` javascript
 # webpack配置中添加workbox-webpack-plugin
 const WorkBoxPlugin = require('workbox-webpack-plugin')
 
@@ -30,9 +28,10 @@ new WorkBoxPlugin.InjectManifest({
   swSrc: path.resolve(__dirname, '../src/service-worker.js')
 })
 ```
+![Image text](https://liverwang.github.io/vue-pwa-skeleton/static/sw.gif)
 
-## 注意事项-swRegister
-``` bash
+## sw-register
+``` javascript
 # 通过sw-register-webpack-plugin插件可以有效完成sw的注册
 
 const SwRegisterWebpackPlugin = require('sw-register-webpack-plugin')
@@ -42,13 +41,20 @@ new SwRegisterWebpackPlugin({
 })
 ```
 
-``` html
+``` javascript
 # 生成的script脚本会注入到HTMLTemplate文件中
-
+window.onload = function () {
+  var script = document.createElement('script');
+  var firstScript = document.getElementsByTagName('script')[0];
+  script.type = 'text/javascript';
+  script.async = true;
+  script.src = '/sw-register.js?v=' + Date.now();
+  firstScript.parentNode.insertBefore(script, firstScript);
+};
 ```
 
-## 注意事项-skeleton
-``` bash
+## skeleton
+``` javascript
 # 因为使用Skeleton，需要分离样式文件，这里直接选择为true
 # 也可以在webpack.skeleton.conf.js文件中，单独设置skeleton的loaders
 loaders: utils.cssLoaders({
@@ -56,14 +62,11 @@ loaders: utils.cssLoaders({
   extract: true
 })
 ```
-![Image text](https://github.com/yguo18/CircleFollowButton/raw/master/Assets/Image/xiaoguotu.png)
-``` bash
-# entry-skeleton.js
-# 作为skeleton的单独入口
-```
+![Image text](https://liverwang.github.io/vue-pwa-skeleton/static/skeleton.gif)
 
 
-## 注意事项-vue-cli
+
+## vue-cli
 
 > Module build failed: Error: No parser and no file path given, couldn't infer a parser.
 
