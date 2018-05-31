@@ -136,7 +136,16 @@ const webpackConfig = merge(baseWebpackConfig, {
       version: +new Date()
     }),
     new SkeletonWebpackPlugin({
-      webpackConfig: require('./webpack.skeleton.conf')
+      webpackConfig: require('./webpack.skeleton.conf'),
+      router: {
+        mode: 'hash',
+        routes: [
+          {
+            path: '/',
+            skeletonId: 'skeleton'
+          }
+        ]
+      }
     })
   ]
 })

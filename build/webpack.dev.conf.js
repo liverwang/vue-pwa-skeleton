@@ -96,8 +96,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new SwRegisterWebpackPlugin({
       version: +new Date()
     }),
+    // 通过routes配置，可以实现多页面多骨架屏
     new SkeletonWebpackPlugin({
-      webpackConfig: require('./webpack.skeleton.conf')
+      webpackConfig: require('./webpack.skeleton.conf'),
+      router: {
+        mode: 'hash',
+        routes: [
+          {
+            path: '/',
+            skeletonId: 'skeleton'
+          },
+          {
+            path: '/detail',
+            skeletonId: 'skeleton_detail'
+          }
+        ]
+      }
     })
   ]
 })
