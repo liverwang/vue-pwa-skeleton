@@ -145,6 +145,10 @@ const webpackConfig = merge(baseWebpackConfig, {
           {
             path: '/',
             skeletonId: 'skeleton'
+          },
+          {
+            path: '/detail',
+            skeletonId: 'skeleton_detail'
           }
         ]
       }
